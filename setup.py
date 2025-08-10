@@ -19,5 +19,5 @@ setup(
     author_email="madhur.prakash2005@gmail.com",  # Optional
     description="Simple-CLI tool",       # Optional
     license="MIT",                   # Or your license type
-    url="https://github.com/Madhur-Prakash/My-CLI.git",  # Optional: project homepage
+    url="https://github.com/Madhur-Prakash/Simple-CLI.git",  # Optional: project homepage
 )
