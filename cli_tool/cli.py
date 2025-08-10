@@ -71,7 +71,7 @@ COMMANDS = {
     "GitHub Automation": "github",
     "Install Dependencies": "inst",
     "Create a new Python Script": "new",
-    "Install React": "react",
+    "Setup React App": "react",
     "Generate Folder Structure": "structure",
     "Create File": "touch",
 }
