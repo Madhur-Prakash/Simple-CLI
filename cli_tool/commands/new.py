@@ -5,8 +5,8 @@ console = Console()
 
 def new_script():
     try: 
-        console.print("Creating a new script...Please be patient.")
-        script_name = Prompt.ask("Enter the name of the new script: ").strip().lower()
+        console.print("[green]Creating a new script...Please be patient.[/green]")
+        script_name = Prompt.ask("[blue]Enter the name of the new script[/blue]").strip().lower()
         script_name = script_name.replace(" ", "_") 
         console.print(f"Created new script: {script_name}.py")
 
@@ -39,8 +39,8 @@ def new_script():
 
 
 def main():
-    console.print("Welcome to the new script creation tool!")
-    console.print("This script will help you create a new script with a template.")
+    console.print("[bold yellow]Welcome to the new script creation tool![/bold yellow]")
+    console.print("[bold yellow]This script will help you create a new script with a template.[/bold yellow]")
     console.print("\n")
     new_script()
     

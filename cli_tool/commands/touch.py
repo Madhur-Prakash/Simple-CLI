@@ -1,4 +1,5 @@
 from rich.console import Console
+from rich.prompt import Prompt
 
 console = Console()
 
@@ -13,8 +14,8 @@ def make_new_file(*args):
         
 
 def main():
-    console.print("[green]Please provide the names of the files to create:[/green]")
-    file_to_create = input().split()
+    console.print("[blue]Please provide the names of the files to create:[/blue]")
+    file_to_create = Prompt.ask("Enter file names (space-separated)").split()
     make_new_file(*file_to_create)
 
 if __name__ == "__main__":

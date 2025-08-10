@@ -12,25 +12,25 @@ def start_auth_containers():
         os.system("docker start 77d33") # -> for kafka 
         os.system("docker start 6e4e8") # -> for zookeper
 
-        inp = str(input("Do you want to start the containers for logging? (y/n): ")).strip().lower()
-        if inp == "y":
+        inp = inquirer.confirm("Do you want to start the containers for logging? (y/n): ").execute()
+        if inp:
             os.system("docker start 9ffd9") # -> for logging
-        elif inp == "n":
-            print("Skipping logging container startup.")
-        print("All containers started successfully!")
+        else:
+            console.print("Skipping logging container startup.")
+        console.print("[yellow]All containers started successfully![/yellow]")
     except Exception as e:
-        print(f"An error occurred: {e}")
-        print("Please check your Docker setup and try again.")
-    
+        console.print(f"[red]An error occurred: {e}[/red]")
+        console.print("[red]Please check your Docker setup and try again.[/red]")
+
     finally:
-        print("\n")
-        print("Exiting...")
-        print("Happy coding!")
+        console.print("\n")
+        console.print("Exiting...")
+        console.print("Happy coding!")
         exit(0)
 
 def stop_auth_containers():
     try:
-        print("Stopping authentication... Please be patient.")
+        console.print("[yellow]Stopping authentication... Please be patient.[/yellow]")
         os.system("docker stop bc601") # -> for mailhog
         os.system("docker stop b4683") # -> for redis
         os.system("docker stop 77d33") # -> for kafka 
@@ -48,8 +48,8 @@ def stop_auth_containers():
         exit(0)
 
 COMMANDS = {
-    "start": "start_auth_containers",
-    "stop": "stop_auth_containers"
+    "start": start_auth_containers,
+    "stop": stop_auth_containers
 }
 
 def main():

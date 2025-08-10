@@ -1,5 +1,9 @@
 import os
 import sys
+from rich.console import Console
+from rich.prompt import Prompt
+
+console = Console()
 
 FILE_COMMENTS = {
     "app.py": "main FastAPI app",
@@ -64,12 +68,12 @@ def draw_tree_to_md(dir_path, prefix="", output=[], function_output=None):
     return output
 
 def main():
-    venv = str(input("Enter the name of your virtual environment (default: venv): ") or "venv")
+    venv = Prompt.ask("Enter the name of your virtual environment", default="venv")
     root_dir = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
     folder_name = os.path.basename(root_dir.rstrip("/\\"))
     ignored_files = ignore_files(venv)
-    
-    print(f"Generating folder structure for: {root_dir}")
+
+    console.print(f"[blue]Generating folder structure for: {root_dir}[/blue]")
     lines = [f"{folder_name}/"]
     lines += draw_tree_to_md(root_dir, function_output=ignored_files)
 
@@ -77,7 +81,7 @@ def main():
     with open("FOLDER_STRUCTURE.md", "w", encoding="utf-8") as f:
         f.write(md_output)
 
-    print("\n✅ Folder structure saved as 'FOLDER_STRUCTURE.md'")
+    console.print("[green]Folder structure saved as 'FOLDER_STRUCTURE.md'[/green]")
 
 if __name__ == "__main__":
     main()

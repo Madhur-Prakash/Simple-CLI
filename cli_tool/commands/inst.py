@@ -5,7 +5,7 @@ console = Console()
 
 def install():
     try:
-        console.print("Installation started... Please be patient.")
+        console.print("[yellow]Installation started... Please be patient.[/yellow]")
         with open("requirements.txt", "w") as f:
             f.write("fastapi[standard]\n")
             f.write("motor\n")
@@ -14,7 +14,7 @@ def install():
             f.write("concurrent_log_handler\n")
             f.close()
         os.system("pip install -r requirements.txt")
-        console.print("Installation completed successfully!")
+        console.print("[green]Installation completed successfully![/green]")
     except Exception as e:
         console.print(f"[red]An error occurred: {e}[/red]")
         console.print("[red]Please check your fastapi installation script and try again.[/red]")
@@ -25,8 +25,8 @@ def install():
 
 
 def main():
-    console.print("Welcome to the FastAPI installation script!")
-    console.print("This script will install FastAPI and some other basic dependencies.")
+    console.print("[bold yellow]Welcome to the FastAPI installation script![/bold yellow]")
+    console.print("[bold yellow]This script will install FastAPI and some other basic dependencies.[/bold yellow]")
     install()
 
 

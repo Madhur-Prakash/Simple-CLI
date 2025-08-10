@@ -29,7 +29,7 @@ def animate_ascii(ascii_str, delay=0.1):
     # console.print("\n".join(lines), style=Style(color="cyan", bold=True))
 
 def loading_animation(duration=1.25):
-    spinner = Spinner("bouncingBall", text="Loading DevLaunch...", style="bold magenta")
+    spinner = Spinner("bouncingBall", text="Loading Simple-CLI...", style="bold magenta")
     with Live(spinner, refresh_per_second=12):
         time.sleep(duration)
 

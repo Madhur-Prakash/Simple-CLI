@@ -7,18 +7,17 @@ def react_app():
     os.system("npm create vite@latest . -- --template react")
 
 def main():
-    console.print("Welcome to the React app creation tool!")
-    console.print("This script will help you create a new React app using Vite.")
-    console.print("\n")
+    console.print("[yellow]Welcome to the React app creation tool![/yellow]")
+    console.print("[yellow]This script will help you create a new React app using Vite.[/yellow]")
 
     try:
         react_app()
         console.print("\n")
-        console.print("React app created successfully!")
-        console.print("Installing dependencies... Please be patient.")
-        console.print("This may take a while depending on your internet connection.")
+        console.print("[green]React app created successfully![/green]")
+        console.print("[yellow]Installing dependencies... Please be patient.[/yellow]")
+        console.print("[yellow]This may take a while depending on your internet connection.[/yellow]")
         os.system("npm install")
-        console.print("Dependencies installed successfully!")
+        console.print("[green]Dependencies installed successfully![/green]")
 
         
     except Exception as e:

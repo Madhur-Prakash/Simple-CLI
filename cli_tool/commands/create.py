@@ -6,7 +6,7 @@ console = Console()
 
 def create_venv():
     try:
-        venv_name = str(input("Enter the name of the virtual environment: ")).strip()
+        venv_name = Prompt.ask("Enter the name of the virtual environment ", default="venv").strip()
         console.print("[green]Creating virtual environment...[/green]")
         os.system(f'python -m venv "{venv_name}"')
         console.print("[green]Virtual environment created successfully.[/green]")
@@ -202,12 +202,12 @@ def make_working_directory(file_name: str, folder_name: str = "workspace"):
 
 def main():
 
-    console.print("[green]Welcome lazy User![/green]")
-    console.print("[green]This script will help you create and setup a python workspace.[/green]")
-    console.print("[green]Please follow the prompts.[/green]")
+    console.print("[bold yellow]Welcome lazy User![/bold yellow]")
+    console.print("[bold green]This script will help you create and setup a python workspace.[/bold green]")
+    console.print("[bold green]Please follow the prompts.[/bold green]")
     console.print("\n")
-    folder_name = Prompt.ask("Enter the name of the folder:", default="my_project").strip()
-    src_file_name = Prompt.ask("Enter the name of the source file:", default="main.py").strip()
+    folder_name = Prompt.ask("Enter the name of the folder", default="my_project").strip()
+    src_file_name = Prompt.ask("Enter the name of the source file", default="main.py").strip()
     make_working_directory(src_file_name, folder_name)
     create_venv()
     console.print("\n")
