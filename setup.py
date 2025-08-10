@@ -5,7 +5,7 @@ def load_requirements():
         return [line.strip() for line in f if line.strip()]
 
 setup(
-    name="Simple-CLI",                # Your package/distribution name
+    name="Simple-CLI",               # Your package/distribution name
     version="1.0.0",
     packages=find_packages(),         # This will find cli_tool and sub-packages
     include_package_data=True,        # To include non-code files specified in MANIFEST.in if any
