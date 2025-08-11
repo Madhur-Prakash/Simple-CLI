@@ -61,7 +61,9 @@ Simple-CLI is a command line interface designed to simplify repetitive tasks suc
    ```
 2. Follow the prompts to perform various tasks.
 
----
+    **Note:** If you want to use the **Start Docker Container** command, you must configure your own Docker container beforehand. Ensure Docker is installed, running, and your container is properly set up before executing this command.
+
+--- ---
 
 ## Project Structure
 
