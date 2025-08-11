@@ -18,7 +18,7 @@ def run_cmd(command, success_msg):
             capture_output=True
         )
         if result.stdout.strip():
-            console.print(f"[cyan]{result.stdout.strip()}[/cyan]")  # Git messages
+            console.print(f"[pink]{result.stdout.strip()}[/pink]")  # Git messages
         console.print(f"[green]{success_msg}[/green]")
     except subprocess.CalledProcessError as e:
         # Show both stdout and stderr from Git
