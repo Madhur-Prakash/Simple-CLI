@@ -223,7 +223,7 @@ def make_working_directory(file_name: str, folder_name: str = "workspace"):
 
 
 
-def main():
+def main(): 
 
     console.print("[bold yellow]Welcome lazy User![/bold yellow]")
     console.print("[bold green]This script will help you create and setup a python workspace.[/bold green]")
