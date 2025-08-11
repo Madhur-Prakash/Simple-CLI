@@ -1,20 +1,41 @@
 import os
+import subprocess
 from InquirerPy import inquirer
 from rich.console import Console
 from rich.prompt import Prompt
 
 console = Console()
 
+
+def run_cmd(command, success_msg):
+    try:
+        # Capture both stdout and stderr
+        result = subprocess.run(
+            command, 
+            check=True, 
+            shell=True, 
+            text=True,
+            capture_output=True
+        )
+        if result.stdout.strip():
+            console.print(f"[cyan]{result.stdout.strip()}[/cyan]")  # Git messages
+        console.print(f"[green]{success_msg}[/green]")
+    except subprocess.CalledProcessError as e:
+        # Show both stdout and stderr from Git
+        if e.stdout and e.stdout.strip():
+            console.print(f"[cyan]{e.stdout.strip()}[/cyan]")
+        if e.stderr and e.stderr.strip():
+            console.print(f"[red]{e.stderr.strip()}[/red]")
+        console.print(f"[red]Command failed: {command}[/red]")
+        exit(1)
+
+
 def push_to_personal():
     try:
-        os.system("git add .")
-        console.print("[green]Added all changes to staging area.[/green]")
+        run_cmd("git add .", "Added all changes to staging area.")
         commit_message = Prompt.ask("Enter commit message", default="update").strip()
-        os.system(f'git commit -m "{commit_message}"')
-        console.print("[green]Committed changes.[/green]")
-        os.system("git push")
-        console.print("[green]Pushed changes to personal repository.[/green]")
-
+        run_cmd(f'git commit -m "{commit_message}"', "Committed changes.")
+        run_cmd("git push", "Pushed changes to personal repository.")
     except Exception as e:
         console.print(f"[red]An error occurred: {e}[/red]")
         console.print("[red]Please check your Github and try again.[/red]")
@@ -28,8 +49,7 @@ def push_to_personal():
 def clone_repo():
     try:
         repo_url = Prompt.ask("Enter the repository URL").strip()
-        os.system(f"git clone {repo_url}")
-        console.print("[green]Cloned the repository successfully.[/green]")
+        run_cmd(f"git clone {repo_url}", "Cloned repository successfully.")
         repo_name = repo_url.split("/")[-1].replace(".git", "")
         console.print(f"[green]Repository name: {repo_name}[/green]")
         os.chdir(repo_name)
@@ -57,19 +77,17 @@ def clone_repo():
 
 def setup_new_repo():
     try:
-        os.system("git init")
-        os.system("git add .")
+        run_cmd("git init", "Initialized git repository.")
+        run_cmd("git add .", "Added changes to staging area.")
         console.print("[green]Added all changes to staging area.[/green]")
         commit_message = Prompt.ask("Enter commit message", default="initial commit").strip()
-        os.system(f'git commit -m "{commit_message}"')
+        run_cmd(f'git commit -m "{commit_message}"', "Committed changes.")
         console.print("[green]Committed changes.[/green]")
         remote_origin_link = Prompt.ask("Enter the remote origin link").strip()
-        os.system(f'git remote add origin "{remote_origin_link}"')
-        console.print("[green]Added remote origin.[/green]")
-        os.system("git branch -M main")
+        run_cmd(f'git remote add origin "{remote_origin_link}"', "Added remote origin.")
+        run_cmd("git branch -M main", "Renamed branch to main.")
         console.print("[green]Renamed branch to main.[/green]")
-        os.system("git push -u origin main")
-        console.print("[green]Pushed changes to main branch.[/green]")
+        run_cmd("git push -u origin main", "Pushed changes to main branch.")
         console.print("[green]Repository setup successfully.[/green]")
 
     except Exception as e:

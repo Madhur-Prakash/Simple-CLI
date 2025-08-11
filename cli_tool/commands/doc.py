@@ -1,20 +1,43 @@
 import os
+import subprocess
 from rich.console import Console
 from InquirerPy import inquirer
 
 console = Console()
 
+def run_cmd(command, success_msg):
+    try:
+        # Capture both stdout and stderr
+        result = subprocess.run(
+            command, 
+            check=True, 
+            shell=True, 
+            text=True,
+            capture_output=True
+        )
+        if result.stdout.strip():
+            console.print(f"[cyan]{result.stdout.strip()}[/cyan]")  # Git messages
+        console.print(f"[green]{success_msg}[/green]")
+    except subprocess.CalledProcessError as e:
+        # Show both stdout and stderr from Git
+        if e.stdout and e.stdout.strip():
+            console.print(f"[cyan]{e.stdout.strip()}[/cyan]")
+        if e.stderr and e.stderr.strip():
+            console.print(f"[red]{e.stderr.strip()}[/red]")
+        console.print(f"[red]Command failed: {command}[/red]")
+        exit(1)
+
+
 def start_auth_containers():
     try:
         console.print("Starting authentication... Please be patient.")
-        os.system("docker start bc601") # -> for mailhog
-        os.system("docker start b4683") # -> for redis
-        os.system("docker start 77d33") # -> for kafka 
-        os.system("docker start 6e4e8") # -> for zookeper
-
+        run_cmd("docker start bc601", "Started mailhog container.")
+        run_cmd("docker start b4683", "Started redis container.")
+        run_cmd("docker start 77d33", "Started kafka container.")
+        run_cmd("docker start 6e4e8", "Started zookeper container.")
         inp = inquirer.confirm("Do you want to start the containers for logging? (y/n): ").execute()
         if inp:
-            os.system("docker start 9ffd9") # -> for logging
+            run_cmd("docker start 9ffd9", "Started logging container.")
         else:
             console.print("Skipping logging container startup.")
         console.print("[yellow]All containers started successfully![/yellow]")
@@ -23,28 +46,26 @@ def start_auth_containers():
         console.print("[red]Please check your Docker setup and try again.[/red]")
 
     finally:
-        console.print("\n")
-        console.print("Exiting...")
-        console.print("Happy coding!")
+        console.print("[yellow]Exiting...[/yellow]")
+        console.print("[yellow]Happy coding![/yellow]")
         exit(0)
 
 def stop_auth_containers():
     try:
         console.print("[yellow]Stopping authentication... Please be patient.[/yellow]")
-        os.system("docker stop bc601") # -> for mailhog
-        os.system("docker stop b4683") # -> for redis
-        os.system("docker stop 77d33") # -> for kafka 
-        os.system("docker stop 6e4e8") # -> for zookeper
-        os.system("docker stop 9ffd9") # -> for logging
-        print("All containers stopped successfully!")
+        run_cmd("docker stop bc601", "Stopped mailhog container.")
+        run_cmd("docker stop b4683", "Stopped redis container.")
+        run_cmd("docker stop 77d33", "Stopped kafka container.")
+        run_cmd("docker stop 6e4e8", "Stopped zookeper container.")
+        run_cmd("docker stop 9ffd9", "Stopped logging container.")
+        console.print("[yellow]All containers stopped successfully![/yellow]")
     except Exception as e:
-        print(f"An error occurred: {e}")
-        print("Please check your Docker setup and try again.")
-    
+        console.print(f"[red]An error occurred: {e}[/red]")
+        console.print("[red]Please check your Docker setup and try again.[/red]")
+
     finally:
-        print("\n")
-        print("Exiting...")
-        print("Happy coding!")
+        console.print("[yellow]Exiting...[/yellow]")
+        console.print("[yellow]Happy coding![/yellow]")
         exit(0)
 
 COMMANDS = {

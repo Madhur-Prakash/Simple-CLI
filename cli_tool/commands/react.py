@@ -1,10 +1,34 @@
 import os
+import subprocess
 from rich.console import Console
 
 console = Console()
 
+def run_cmd(command, success_msg):
+    try:
+        # Capture both stdout and stderr
+        result = subprocess.run(
+            command, 
+            check=True, 
+            shell=True, 
+            text=True,
+            capture_output=True
+        )
+        if result.stdout.strip():
+            console.print(f"[cyan]{result.stdout.strip()}[/cyan]")  # Git messages
+        console.print(f"[green]{success_msg}[/green]")
+    except subprocess.CalledProcessError as e:
+        # Show both stdout and stderr from Git
+        if e.stdout and e.stdout.strip():
+            console.print(f"[cyan]{e.stdout.strip()}[/cyan]")
+        if e.stderr and e.stderr.strip():
+            console.print(f"[red]{e.stderr.strip()}[/red]")
+        console.print(f"[red]Command failed: {command}[/red]")
+        exit(1)
+
+
 def react_app():
-    os.system("npm create vite@latest . -- --template react")
+    run_cmd("npm create vite@latest . -- --template react", "React app created successfully.")
 
 def main():
     console.print("[yellow]Welcome to the React app creation tool![/yellow]")

@@ -1,16 +1,39 @@
 import os
+import subprocess
 from rich.console import Console
 from rich.prompt import Prompt
 
 console = Console()
 
+
+def run_cmd(command, success_msg):
+    try:
+        # Capture both stdout and stderr
+        result = subprocess.run(
+            command, 
+            check=True, 
+            shell=True, 
+            text=True,
+            capture_output=True
+        )
+        if result.stdout.strip():
+            console.print(f"[cyan]{result.stdout.strip()}[/cyan]")  # Git messages
+        console.print(f"[green]{success_msg}[/green]")
+    except subprocess.CalledProcessError as e:
+        # Show both stdout and stderr from Git
+        if e.stdout and e.stdout.strip():
+            console.print(f"[cyan]{e.stdout.strip()}[/cyan]")
+        if e.stderr and e.stderr.strip():
+            console.print(f"[red]{e.stderr.strip()}[/red]")
+        console.print(f"[red]Command failed: {command}[/red]")
+        exit(1)
+
+
 def create_venv():
     try:
         venv_name = Prompt.ask("Enter the name of the virtual environment ", default="venv").strip()
         console.print("[green]Creating virtual environment...[/green]")
-        os.system(f'python -m venv "{venv_name}"')
-        console.print("[green]Virtual environment created successfully.[/green]")
-
+        run_cmd(f'python -m venv "{venv_name}"', "Virtual environment created successfully.")
         if not os.path.exists(".gitignore"):
             open(".gitignore", "w").close()
         with open(".gitignore", "rb+") as f:
