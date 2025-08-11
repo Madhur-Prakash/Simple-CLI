@@ -30,7 +30,7 @@ def run_cmd(command, success_msg):
         exit(1)
 
 
-def push_to_personal(): 
+def push_to_personal():
     try:
         run_cmd("git add .", "Added all changes to staging area.")
         commit_message = Prompt.ask("Enter commit message", default="update").strip()
