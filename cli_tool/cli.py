@@ -67,7 +67,6 @@ def loading_animation(duration=1.25):
 
 COMMANDS = {
     "Setup New Python Project": "create",
-    "Start Docker Container": "doc",
     "GitHub Automation": "github",
     "Install Dependencies": "inst",
     "Create a new Python Script": "new",
