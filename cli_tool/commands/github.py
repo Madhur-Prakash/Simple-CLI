@@ -79,14 +79,11 @@ def setup_new_repo():
     try:
         run_cmd("git init", "Initialized git repository.")
         run_cmd("git add .", "Added changes to staging area.")
-        console.print("[green]Added all changes to staging area.[/green]")
         commit_message = Prompt.ask("Enter commit message", default="initial commit").strip()
         run_cmd(f'git commit -m "{commit_message}"', "Committed changes.")
-        console.print("[green]Committed changes.[/green]")
         remote_origin_link = Prompt.ask("Enter the remote origin link").strip()
         run_cmd(f'git remote add origin "{remote_origin_link}"', "Added remote origin.")
         run_cmd("git branch -M main", "Renamed branch to main.")
-        console.print("[green]Renamed branch to main.[/green]")
         run_cmd("git push -u origin main", "Pushed changes to main branch.")
         console.print("[green]Repository setup successfully.[/green]")
 
