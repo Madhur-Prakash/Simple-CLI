@@ -229,8 +229,11 @@ def main():
     console.print("[bold green]This script will help you create and setup a python workspace.[/bold green]")
     console.print("[bold green]Please follow the prompts.[/bold green]")
     console.print("\n")
-    folder_name = Prompt.ask("Enter the name of the folder", default="my_project").strip()
-    src_file_name = Prompt.ask("Enter the name of the source file", default="main.py").strip()
+    default_folder_name = os.path.basename(os.getcwd())
+    arr = default_folder_name.split(" ") if " " in default_folder_name else default_folder_name.split("-") if "-" in default_folder_name else default_folder_name.split("_") if "_" in default_folder_name else [default_folder_name]
+    default_folder_name = "_".join(arr).lower() 
+    folder_name = Prompt.ask("Enter the name of the folder", default=default_folder_name).strip()
+    src_file_name = Prompt.ask("Enter the name of the source file", default=default_folder_name + ".py").strip()
     make_working_directory(src_file_name, folder_name)
     create_venv()
     console.print("\n")
