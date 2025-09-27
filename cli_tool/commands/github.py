@@ -107,7 +107,7 @@ COMMANDS = {
 
 
 def main():
-    console.print("[yellow]Welcome to the GitHub Pull and Push Script[/yellow]")
+    console.print("[yellow]Welcome to the GitHub Automation Script![/yellow]")
 
     commands = COMMANDS
     if not commands:

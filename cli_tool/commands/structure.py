@@ -68,6 +68,8 @@ def draw_tree_to_md(dir_path, prefix="", output=[], function_output=None):
     return output
 
 def main():
+    console.print("[bold blue]Welcome to the Folder Structure Creation Script![/bold blue]")
+    console.print("[bold green]Please follow the prompts.[/bold green]")
     venv = Prompt.ask("Enter the name of your virtual environment", default="venv")
     root_dir = sys.argv[1] if len(sys.argv) > 1 else os.getcwd()
     folder_name = os.path.basename(root_dir.rstrip("/\\"))

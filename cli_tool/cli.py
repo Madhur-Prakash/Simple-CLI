@@ -68,8 +68,7 @@ def loading_animation(duration=1.25):
 COMMANDS = {
     "Setup New Python Project": "create",
     "GitHub Automation": "github",
-    "Install Dependencies": "inst",
-    "Create a new Python Script": "new",
+    "Install Basic FastAPI Dependencies": "inst",
     "Setup React App": "react",
     "Generate Folder Structure": "structure",
     "Create File": "touch",

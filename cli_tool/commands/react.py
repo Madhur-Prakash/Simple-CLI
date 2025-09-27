@@ -31,7 +31,7 @@ def react_app():
     run_cmd("npm create vite@latest . -- --template react", "React app created successfully.")
 
 def main():
-    console.print("[yellow]Welcome to the React app creation tool![/yellow]")
+    console.print("[yellow]Welcome to the React App Creation Script![/yellow]")
     console.print("[yellow]This script will help you create a new React app using Vite.[/yellow]")
 
     try:

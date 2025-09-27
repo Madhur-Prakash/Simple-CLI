@@ -25,7 +25,7 @@ def install():
 
 
 def main():
-    console.print("[bold yellow]Welcome to the FastAPI installation script![/bold yellow]")
+    console.print("[bold yellow]Welcome to the FastAPI Installation Script![/bold yellow]")
     console.print("[bold yellow]This script will install FastAPI and some other basic dependencies.[/bold yellow]")
     install()
 
