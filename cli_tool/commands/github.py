@@ -55,7 +55,7 @@ def clone_repo():
         os.chdir(repo_name)
         console.print(f"[green]Changed directory to {repo_name}.[/green]")
 
-        open_in_vscode = Prompt.ask("Do you want to open the repository in VS Code? (yes/no)", default="no").strip().lower()
+        open_in_vscode = Prompt.ask("Do you want to open the repository in VS Code? (y/n)", default="no").strip().lower()
         if open_in_vscode == "yes" or open_in_vscode == "y":
             os.system("code .")
             console.print("[green]Opened the repository in VS Code.[/green]")
