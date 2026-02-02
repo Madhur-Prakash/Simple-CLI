@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=80.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "Simple-CLI"
+version = "1.0.0"
+description = "Simple-CLI tool"
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+
+authors = [
+    { name = "Madhur Prakash", email = "madhurprakash2005@gmail.com" }
+]
+
+dependencies = [
+    "inquirerpy",
+    "rich"
+]
+
+[project.urls]
+Homepage = "https://github.com/Madhur-Prakash/Simple-CLI.git"
+
+[project.scripts]
+simple = "cli_tool.cli:main"

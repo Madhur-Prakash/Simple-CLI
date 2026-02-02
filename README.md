@@ -42,13 +42,14 @@ Simple-CLI is a command line interface designed to simplify repetitive tasks suc
    ```bash
    cd Simple-CLI
    ```
-3. Install dependencies:
+3. (Optional) Create and activate a virtual environment:
    ```bash
-   pip install -r requirements.txt
+   python -m venv venv
+   source venv/bin/activate  # On Windows use `venv\Scripts\activate`
    ```
 4. Install the package:
    ```bash
-   python setup.py install
+   pip install .
    ```
 
 ---
@@ -61,31 +62,31 @@ Simple-CLI is a command line interface designed to simplify repetitive tasks suc
    ```
 2. Follow the prompts to perform various tasks.
 
-    **Note:** If you want to use the **Start Docker Container** command, you must configure your own Docker container beforehand. Ensure Docker is installed, running, and your container is properly set up before executing this command.
-
---- ---
+---
 
 ## Project Structure
 
-```plaintext
-Dev tools/
+```
+SimpleCLI/
 ├── .gitignore  # gitignore file for GitHub
+├── .python-version
 ├── LICENSE
+├── README.md  # Project documentation
 ├── cli_tool
 │   ├── __init__.py  # initializes package
 │   ├── cli.py
 │   └── commands
 │       ├── __init__.py  # initializes package
 │       ├── create.py
-│       ├── doc.py
 │       ├── github.py
 │       ├── inst.py
-│       ├── new.py
 │       ├── react.py
 │       ├── structure.py
 │       └── touch.py
+├── pyproject.toml
 ├── requirements.txt
-└── setup.py
+├── setup.py
+└── uv.lock
 ```
 
 ---
